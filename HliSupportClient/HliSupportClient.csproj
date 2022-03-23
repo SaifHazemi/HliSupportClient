@@ -1,0 +1,1555 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.3\build\Microsoft.CodeAnalysis.Analyzers.props" Condition="Exists('..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.3\build\Microsoft.CodeAnalysis.Analyzers.props')" />
+  <Import Project="..\packages\Microsoft.DiaSymReader.Native.1.7.0\build\Microsoft.DiaSymReader.Native.props" Condition="Exists('..\packages\Microsoft.DiaSymReader.Native.1.7.0\build\Microsoft.DiaSymReader.Native.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{183702CE-D43D-49A9-B217-563992CFFE7F}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HliSupportClient</RootNamespace>
+    <AssemblyName>HliSupportClient</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44345</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MassTransit, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\MassTransit.8.0.0\lib\netstandard2.0\MassTransit.dll</HintPath>
+    </Reference>
+    <Reference Include="MassTransit.Abstractions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\MassTransit.Abstractions.8.0.0\lib\netstandard2.0\MassTransit.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Antiforgery, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Antiforgery.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Antiforgery.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authentication.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authentication.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Authentication.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authentication.Core, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authentication.Core.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Authentication.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authorization, Version=5.0.15.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authorization.5.0.15\lib\net461\Microsoft.AspNetCore.Authorization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authorization.Policy, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authorization.Policy.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Authorization.Policy.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Cryptography.Internal, Version=6.0.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Cryptography.Internal.6.0.3\lib\net461\Microsoft.AspNetCore.Cryptography.Internal.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.DataProtection, Version=5.0.15.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.DataProtection.5.0.15\lib\net461\Microsoft.AspNetCore.DataProtection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.DataProtection.Abstractions, Version=6.0.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.DataProtection.Abstractions.6.0.3\lib\net461\Microsoft.AspNetCore.DataProtection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Diagnostics.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Diagnostics.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Diagnostics.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Hosting, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Hosting.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Hosting.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Hosting.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Hosting.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Hosting.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Hosting.Server.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Hosting.Server.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Hosting.Server.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Html.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Html.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Html.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http, Version=2.2.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.2.2.2\lib\netstandard2.0\Microsoft.AspNetCore.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Extensions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Extensions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Features, Version=5.0.15.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Features.5.0.15\lib\net461\Microsoft.AspNetCore.Http.Features.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.JsonPatch, Version=5.0.15.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.JsonPatch.5.0.15\lib\net461\Microsoft.AspNetCore.JsonPatch.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Metadata, Version=6.0.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Metadata.6.0.3\lib\net461\Microsoft.AspNetCore.Metadata.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Mvc.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Core, Version=2.2.5.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Mvc.Core.2.2.5\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.DataAnnotations, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Mvc.DataAnnotations.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.DataAnnotations.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Formatters.Json, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Mvc.Formatters.Json.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Formatters.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Razor, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Mvc.Razor.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Razor.Extensions, Version=6.0.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Mvc.Razor.Extensions.6.0.3\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Razor.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.RazorPages, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Mvc.RazorPages.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.RazorPages.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.TagHelpers, Version=2.1.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Mvc.TagHelpers.2.1.3\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.TagHelpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.ViewFeatures, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Mvc.ViewFeatures.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.ViewFeatures.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Razor, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Razor.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Razor.Language, Version=6.0.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Razor.Language.6.0.3\lib\netstandard2.0\Microsoft.AspNetCore.Razor.Language.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Razor.Runtime, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Razor.Runtime.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Razor.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.ResponseCaching.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.ResponseCaching.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.ResponseCaching.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Routing, Version=2.2.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Routing.2.2.2\lib\netstandard2.0\Microsoft.AspNetCore.Routing.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Routing.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Routing.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Routing.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.WebUtilities, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.WebUtilities.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.WebUtilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeAnalysis.Common.4.1.0\lib\netstandard2.0\Microsoft.CodeAnalysis.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.CSharp, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeAnalysis.CSharp.4.1.0\lib\netstandard2.0\Microsoft.CodeAnalysis.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.Razor, Version=6.0.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeAnalysis.Razor.6.0.3\lib\netstandard2.0\Microsoft.CodeAnalysis.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=3.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Crm.Sdk.Proxy, Version=9.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CrmSdk.CoreAssemblies.9.0.2.42\lib\net462\Microsoft.Crm.Sdk.Proxy.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.DotNet.PlatformAbstractions, Version=3.1.6.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.DotNet.PlatformAbstractions.3.1.6\lib\net45\Microsoft.DotNet.PlatformAbstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Caching.Abstractions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Caching.Abstractions.6.0.0\lib\net461\Microsoft.Extensions.Caching.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Caching.Memory, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Caching.Memory.5.0.0\lib\net461\Microsoft.Extensions.Caching.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Abstractions.6.0.0\lib\net461\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.EnvironmentVariables, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.EnvironmentVariables.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.EnvironmentVariables.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.FileExtensions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.FileExtensions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.FileExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.6.0.0\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.6.0.0\lib\net461\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyModel, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyModel.5.0.0\lib\net461\Microsoft.Extensions.DependencyModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Diagnostics.HealthChecks, Version=3.1.18.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Diagnostics.HealthChecks.3.1.18\lib\netstandard2.0\Microsoft.Extensions.Diagnostics.HealthChecks.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions, Version=3.1.18.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions.3.1.18\lib\netstandard2.0\Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.FileProviders.Abstractions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.FileProviders.Abstractions.6.0.0\lib\net461\Microsoft.Extensions.FileProviders.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.FileProviders.Composite, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.FileProviders.Composite.6.0.0\lib\net461\Microsoft.Extensions.FileProviders.Composite.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.FileProviders.Physical, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.FileProviders.Physical.2.2.0\lib\netstandard2.0\Microsoft.Extensions.FileProviders.Physical.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.FileSystemGlobbing, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.FileSystemGlobbing.6.0.0\lib\net461\Microsoft.Extensions.FileSystemGlobbing.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Hosting.Abstractions, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Hosting.Abstractions.5.0.0\lib\net461\Microsoft.Extensions.Hosting.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Http, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Http.6.0.0\lib\net461\Microsoft.Extensions.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Localization, Version=5.0.15.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Localization.5.0.15\lib\net461\Microsoft.Extensions.Localization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Localization.Abstractions, Version=6.0.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Localization.Abstractions.6.0.3\lib\net461\Microsoft.Extensions.Localization.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.6.0.0\lib\net461\Microsoft.Extensions.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=6.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.1\lib\net461\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.ObjectPool, Version=6.0.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.ObjectPool.6.0.3\lib\net461\Microsoft.Extensions.ObjectPool.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.6.0.0\lib\net461\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.6.0.0\lib\net461\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.WebEncoders, Version=5.0.15.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.WebEncoders.5.0.15\lib\net461\Microsoft.Extensions.WebEncoders.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Net.Http.Headers, Version=2.2.8.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.Headers.2.2.8\lib\netstandard2.0\Microsoft.Net.Http.Headers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Registry, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Win32.Registry.5.0.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xrm.Sdk, Version=9.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CrmSdk.CoreAssemblies.9.0.2.42\lib\net462\Microsoft.Xrm.Sdk.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json.Bson, Version=1.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.Bson.1.0.2\lib\net45\Newtonsoft.Json.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.AppContext, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.AppContext.4.3.0\lib\net463\System.AppContext.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.6.0.0\lib\net461\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Console, Version=4.0.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Console.4.3.1\lib\net46\System.Console.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.6.0.0\lib\net461\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.FileVersionInfo, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.FileVersionInfo.4.3.0\lib\net46\System.Diagnostics.FileVersionInfo.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.StackTrace, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.StackTrace.4.3.0\lib\net46\System.Diagnostics.StackTrace.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.4.3.0\lib\net46\System.IO.Compression.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.4.3.0\lib\net46\System.IO.FileSystem.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.3.0\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Pipelines, Version=5.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Pipelines.5.0.2\lib\net461\System.IO.Pipelines.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Linq, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.4.3.0\lib\net463\System.Linq.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Linq.Expressions, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Expressions.4.3.0\lib\net463\System.Linq.Expressions.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.0\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.1.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Sockets, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Sockets.4.3.0\lib\net46\System.Net.Sockets.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reflection.4.3.0\lib\net462\System.Reflection.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reflection.Metadata, Version=6.0.0.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reflection.Metadata.6.0.1\lib\net461\System.Reflection.Metadata.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.4.3.1\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Extensions, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.Extensions.4.3.1\lib\net462\System.Runtime.Extensions.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.4.3.0\lib\net463\System.Runtime.InteropServices.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.AccessControl, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.AccessControl.6.0.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.1\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.2\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Xml, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Xml.6.0.0\lib\net461\System.Security.Cryptography.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Permissions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Permissions.6.0.0\lib\net461\System.Security.Permissions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Text.Encoding.CodePages, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encoding.CodePages.6.0.0\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.6.0.0\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=6.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.6.0.2\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Channels, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Channels.6.0.0\lib\net461\System.Threading.Channels.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Thread, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Thread.4.3.0\lib\net46\System.Threading.Thread.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.0.0\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.0.1\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.ReaderWriter, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Xml.ReaderWriter.4.3.1\lib\net46\System.Xml.ReaderWriter.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.XmlDocument, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Xml.XmlDocument.4.3.0\lib\net46\System.Xml.XmlDocument.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.XPath, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Xml.XPath.4.3.0\lib\net46\System.Xml.XPath.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.XPath.XDocument, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Xml.XPath.XDocument.4.3.0\lib\net46\System.Xml.XPath.XDocument.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Data\CompteController.cs" />
+    <Compile Include="App_Data\HomeApiController.cs" />
+    <Compile Include="App_Data\IncidentController.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AjouterModel.cs" />
+    <Compile Include="Models\Compte.cs" />
+    <Compile Include="Models\Contact.cs" />
+    <Compile Include="Models\Incident.cs" />
+    <Compile Include="Models\ResetPasswordModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Admin\bootstrap\css\bootstrap.css" />
+    <Content Include="Admin\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Admin\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Admin\bootstrap\js\bootstrap.js" />
+    <Content Include="Admin\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Admin\dist\css\admin-lte.css" />
+    <Content Include="Admin\dist\css\admin-lte.min.css" />
+    <Content Include="Admin\dist\css\skins\skin-black-light.css" />
+    <Content Include="Admin\dist\css\skins\skin-black-light.min.css" />
+    <Content Include="Admin\dist\css\skins\skin-black.css" />
+    <Content Include="Admin\dist\css\skins\skin-black.min.css" />
+    <Content Include="Admin\dist\css\skins\skin-blue-light.css" />
+    <Content Include="Admin\dist\css\skins\skin-blue-light.min.css" />
+    <Content Include="Admin\dist\css\skins\skin-blue.css" />
+    <Content Include="Admin\dist\css\skins\skin-blue.min.css" />
+    <Content Include="Admin\dist\css\skins\skin-green-light.css" />
+    <Content Include="Admin\dist\css\skins\skin-green-light.min.css" />
+    <Content Include="Admin\dist\css\skins\skin-green.css" />
+    <Content Include="Admin\dist\css\skins\skin-green.min.css" />
+    <Content Include="Admin\dist\css\skins\skin-purple-light.css" />
+    <Content Include="Admin\dist\css\skins\skin-purple-light.min.css" />
+    <Content Include="Admin\dist\css\skins\skin-purple.css" />
+    <Content Include="Admin\dist\css\skins\skin-purple.min.css" />
+    <Content Include="Admin\dist\css\skins\skin-red-light.css" />
+    <Content Include="Admin\dist\css\skins\skin-red-light.min.css" />
+    <Content Include="Admin\dist\css\skins\skin-red.css" />
+    <Content Include="Admin\dist\css\skins\skin-red.min.css" />
+    <Content Include="Admin\dist\css\skins\skin-yellow-light.css" />
+    <Content Include="Admin\dist\css\skins\skin-yellow-light.min.css" />
+    <Content Include="Admin\dist\css\skins\skin-yellow.css" />
+    <Content Include="Admin\dist\css\skins\skin-yellow.min.css" />
+    <Content Include="Admin\dist\css\skins\_all-skins.css" />
+    <Content Include="Admin\dist\css\skins\_all-skins.min.css" />
+    <Content Include="Admin\dist\img\avatar.png" />
+    <Content Include="Admin\dist\img\avatar04.png" />
+    <Content Include="Admin\dist\img\avatar2.png" />
+    <Content Include="Admin\dist\img\avatar3.png" />
+    <Content Include="Admin\dist\img\avatar5.png" />
+    <Content Include="Admin\dist\img\boxed-bg.jpg" />
+    <Content Include="Admin\dist\img\boxed-bg.png" />
+    <Content Include="Admin\dist\img\credit\american-express.png" />
+    <Content Include="Admin\dist\img\credit\cirrus.png" />
+    <Content Include="Admin\dist\img\credit\mastercard.png" />
+    <Content Include="Admin\dist\img\credit\mestro.png" />
+    <Content Include="Admin\dist\img\credit\paypal.png" />
+    <Content Include="Admin\dist\img\credit\paypal2.png" />
+    <Content Include="Admin\dist\img\credit\visa.png" />
+    <Content Include="Admin\dist\img\default-50x50.gif" />
+    <Content Include="Admin\dist\img\icons.png" />
+    <Content Include="Admin\dist\img\photo1.png" />
+    <Content Include="Admin\dist\img\photo2.png" />
+    <Content Include="Admin\dist\img\photo3.jpg" />
+    <Content Include="Admin\dist\img\photo4.jpg" />
+    <Content Include="Admin\dist\img\user.svg" />
+    <Content Include="Admin\dist\js\app.js" />
+    <Content Include="Admin\dist\js\app.min.js" />
+    <Content Include="Admin\documentation\css\style.css" />
+    <Content Include="Admin\documentation\js\docs.js" />
+    <Content Include="Admin\Image\cropped-favicon.png" />
+    <Content Include="Admin\Image\HLI-Consulting-Tunisie.jpg" />
+    <Content Include="Admin\plugins\bootstrap-slider\css\slider.css" />
+    <Content Include="Admin\plugins\bootstrap-slider\js\bootstrap-slider.js" />
+    <Content Include="Admin\plugins\bootstrap-wysihtml5\css\bootstrap3-wysihtml5.css" />
+    <Content Include="Admin\plugins\bootstrap-wysihtml5\css\bootstrap3-wysihtml5.min.css" />
+    <Content Include="Admin\plugins\bootstrap-wysihtml5\js\bootstrap3-wysihtml5.all.js" />
+    <Content Include="Admin\plugins\bootstrap-wysihtml5\js\bootstrap3-wysihtml5.all.min.js" />
+    <Content Include="Admin\plugins\chartjs\js\chart.js" />
+    <Content Include="Admin\plugins\chartjs\js\chart.min.js" />
+    <Content Include="Admin\plugins\ckeditor\js\adapters\jquery.js" />
+    <Content Include="Admin\plugins\ckeditor\js\build-config.js" />
+    <Content Include="Admin\plugins\ckeditor\js\ckeditor.js" />
+    <Content Include="Admin\plugins\ckeditor\js\config.js" />
+    <Content Include="Admin\plugins\ckeditor\js\contents.css" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\af.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\ar.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\bg.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\bn.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\bs.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\ca.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\cs.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\cy.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\da.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\de.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\el.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\en-au.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\en-ca.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\en-gb.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\en.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\eo.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\es.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\et.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\eu.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\fa.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\fi.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\fo.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\fr-ca.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\fr.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\gl.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\gu.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\he.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\hi.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\hr.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\hu.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\id.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\is.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\it.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\ja.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\ka.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\km.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\ko.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\ku.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\lt.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\lv.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\mk.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\mn.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\ms.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\nb.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\nl.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\no.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\pl.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\pt-br.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\pt.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\ro.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\ru.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\si.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\sk.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\sl.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\sq.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\sr-latn.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\sr.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\sv.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\th.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\tr.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\ug.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\uk.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\vi.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\zh-cn.js" />
+    <Content Include="Admin\plugins\ckeditor\js\lang\zh.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\a11yhelp.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\ar.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\bg.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\ca.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\cs.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\cy.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\da.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\de.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\el.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\en.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\eo.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\es.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\et.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\fa.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\fi.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\fr-ca.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\fr.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\gl.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\gu.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\he.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\hi.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\hr.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\hu.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\id.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\it.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\ja.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\km.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\ko.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\ku.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\lt.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\lv.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\mk.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\mn.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\nb.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\nl.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\no.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\pl.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\pt-br.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\pt.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\ro.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\ru.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\si.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\sk.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\sl.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\sq.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\sr-latn.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\sr.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\sv.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\th.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\tr.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\ug.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\uk.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\vi.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\zh-cn.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\zh.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\a11yhelp\dialogs\lang\_translationstatus.txt" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\about\dialogs\about.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\about\dialogs\hidpi\logo_ckeditor.png" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\about\dialogs\logo_ckeditor.png" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\clipboard\dialogs\paste.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\dialog\dialogDefinition.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\fakeobjects\images\spacer.gif" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\icons.png" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\icons_hidpi.png" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\image\dialogs\image.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\image\images\noimage.png" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\link\dialogs\anchor.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\link\dialogs\link.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\link\images\anchor.png" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\link\images\hidpi\anchor.png" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\magicline\images\hidpi\icon.png" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\magicline\images\icon.png" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\pastefromword\filter\default.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\scayt\dialogs\options.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\scayt\dialogs\toolbar.css" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\ar.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\bg.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\ca.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\cs.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\cy.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\de.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\el.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\en.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\eo.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\es.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\et.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\fa.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\fi.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\fr-ca.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\fr.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\gl.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\he.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\hr.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\hu.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\id.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\it.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\ja.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\km.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\ku.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\lv.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\nb.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\nl.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\no.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\pl.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\pt-br.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\pt.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\ru.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\si.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\sk.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\sl.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\sq.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\sv.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\th.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\tr.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\ug.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\uk.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\vi.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\zh-cn.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\zh.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\lang\_translationstatus.txt" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\specialchar\dialogs\specialchar.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\tabletools\dialogs\tableCell.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\table\dialogs\table.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\wsc\dialogs\ciframe.html" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\wsc\dialogs\tmp.html" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\wsc\dialogs\tmpFrameset.html" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\wsc\dialogs\wsc.css" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\wsc\dialogs\wsc.js" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\wsc\dialogs\wsc_ie.js" />
+    <Content Include="Admin\plugins\ckeditor\js\skins\moono\dialog.css" />
+    <Content Include="Admin\plugins\ckeditor\js\skins\moono\dialog_ie.css" />
+    <Content Include="Admin\plugins\ckeditor\js\skins\moono\dialog_ie7.css" />
+    <Content Include="Admin\plugins\ckeditor\js\skins\moono\dialog_ie8.css" />
+    <Content Include="Admin\plugins\ckeditor\js\skins\moono\dialog_iequirks.css" />
+    <Content Include="Admin\plugins\ckeditor\js\skins\moono\dialog_opera.css" />
+    <Content Include="Admin\plugins\ckeditor\js\skins\moono\editor.css" />
+    <Content Include="Admin\plugins\ckeditor\js\skins\moono\editor_gecko.css" />
+    <Content Include="Admin\plugins\ckeditor\js\skins\moono\editor_ie.css" />
+    <Content Include="Admin\plugins\ckeditor\js\skins\moono\editor_ie7.css" />
+    <Content Include="Admin\plugins\ckeditor\js\skins\moono\editor_ie8.css" />
+    <Content Include="Admin\plugins\ckeditor\js\skins\moono\editor_iequirks.css" />
+    <Content Include="Admin\plugins\ckeditor\js\skins\moono\icons.png" />
+    <Content Include="Admin\plugins\ckeditor\js\skins\moono\icons_hidpi.png" />
+    <Content Include="Admin\plugins\ckeditor\js\skins\moono\images\arrow.png" />
+    <Content Include="Admin\plugins\ckeditor\js\skins\moono\images\close.png" />
+    <Content Include="Admin\plugins\ckeditor\js\skins\moono\images\hidpi\close.png" />
+    <Content Include="Admin\plugins\ckeditor\js\skins\moono\images\hidpi\lock-open.png" />
+    <Content Include="Admin\plugins\ckeditor\js\skins\moono\images\hidpi\lock.png" />
+    <Content Include="Admin\plugins\ckeditor\js\skins\moono\images\hidpi\refresh.png" />
+    <Content Include="Admin\plugins\ckeditor\js\skins\moono\images\lock-open.png" />
+    <Content Include="Admin\plugins\ckeditor\js\skins\moono\images\lock.png" />
+    <Content Include="Admin\plugins\ckeditor\js\skins\moono\images\refresh.png" />
+    <Content Include="Admin\plugins\ckeditor\js\styles.js" />
+    <Content Include="Admin\plugins\colorpicker\css\bootstrap-colorpicker.css" />
+    <Content Include="Admin\plugins\colorpicker\css\bootstrap-colorpicker.min.css" />
+    <Content Include="Admin\plugins\colorpicker\img\alpha-horizontal.png" />
+    <Content Include="Admin\plugins\colorpicker\img\alpha.png" />
+    <Content Include="Admin\plugins\colorpicker\img\hue-horizontal.png" />
+    <Content Include="Admin\plugins\colorpicker\img\hue.png" />
+    <Content Include="Admin\plugins\colorpicker\img\saturation.png" />
+    <Content Include="Admin\plugins\colorpicker\js\bootstrap-colorpicker.js" />
+    <Content Include="Admin\plugins\colorpicker\js\bootstrap-colorpicker.min.js" />
+    <Content Include="Admin\plugins\datatables\css\dataTables.bootstrap.css" />
+    <Content Include="Admin\plugins\datatables\css\jquery.dataTables.css" />
+    <Content Include="Admin\plugins\datatables\css\jquery.dataTables.min.css" />
+    <Content Include="Admin\plugins\datatables\css\jquery.dataTables_themeroller.css" />
+    <Content Include="Admin\plugins\datatables\images\sort_asc.png" />
+    <Content Include="Admin\plugins\datatables\images\sort_asc_disabled.png" />
+    <Content Include="Admin\plugins\datatables\images\sort_both.png" />
+    <Content Include="Admin\plugins\datatables\images\sort_desc.png" />
+    <Content Include="Admin\plugins\datatables\images\sort_desc_disabled.png" />
+    <Content Include="Admin\plugins\datatables\js\dataTables.bootstrap.js" />
+    <Content Include="Admin\plugins\datatables\js\dataTables.bootstrap.min.js" />
+    <Content Include="Admin\plugins\datatables\js\extensions\AutoFill\css\dataTables.autoFill.css" />
+    <Content Include="Admin\plugins\datatables\js\extensions\AutoFill\css\dataTables.autoFill.min.css" />
+    <Content Include="Admin\plugins\datatables\js\extensions\AutoFill\examples\columns.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\AutoFill\examples\complete-callback.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\AutoFill\examples\fill-both.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\AutoFill\examples\fill-horizontal.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\AutoFill\examples\index.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\AutoFill\examples\scrolling.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\AutoFill\examples\simple.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\AutoFill\examples\step-callback.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\AutoFill\images\filler.png" />
+    <Content Include="Admin\plugins\datatables\js\extensions\AutoFill\js\dataTables.autoFill.js" />
+    <Content Include="Admin\plugins\datatables\js\extensions\AutoFill\js\dataTables.autoFill.min.js" />
+    <Content Include="Admin\plugins\datatables\js\extensions\AutoFill\Readme.txt" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColReorder\css\dataTables.colReorder.css" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColReorder\css\dataTables.colReorder.min.css" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColReorder\examples\alt_insert.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColReorder\examples\colvis.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColReorder\examples\col_filter.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColReorder\examples\fixedcolumns.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColReorder\examples\fixedheader.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColReorder\examples\index.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColReorder\examples\jqueryui.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColReorder\examples\new_init.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColReorder\examples\predefined.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColReorder\examples\realtime.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColReorder\examples\reset.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColReorder\examples\scrolling.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColReorder\examples\server_side.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColReorder\examples\simple.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColReorder\examples\state_save.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColReorder\images\insert.png" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColReorder\js\dataTables.colReorder.js" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColReorder\js\dataTables.colReorder.min.js" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColReorder\License.txt" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColVis\css\dataTables.colVis.css" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColVis\css\dataTables.colvis.jqueryui.css" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColVis\css\dataTables.colVis.min.css" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColVis\examples\button_order.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColVis\examples\exclude_columns.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColVis\examples\group_columns.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColVis\examples\index.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColVis\examples\jqueryui.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColVis\examples\mouseover.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColVis\examples\new_init.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColVis\examples\restore.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColVis\examples\simple.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColVis\examples\text.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColVis\examples\title_callback.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColVis\examples\two_tables.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColVis\examples\two_tables_identical.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColVis\js\dataTables.colVis.js" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColVis\js\dataTables.colVis.min.js" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColVis\License.txt" />
+    <Content Include="Admin\plugins\datatables\js\extensions\FixedColumns\css\dataTables.fixedColumns.css" />
+    <Content Include="Admin\plugins\datatables\js\extensions\FixedColumns\css\dataTables.fixedColumns.min.css" />
+    <Content Include="Admin\plugins\datatables\js\extensions\FixedColumns\examples\bootstrap.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\FixedColumns\examples\colvis.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\FixedColumns\examples\col_filter.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\FixedColumns\examples\css_size.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\FixedColumns\examples\index.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\FixedColumns\examples\index_column.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\FixedColumns\examples\left_right_columns.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\FixedColumns\examples\right_column.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\FixedColumns\examples\rowspan.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\FixedColumns\examples\server-side-processing.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\FixedColumns\examples\simple.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\FixedColumns\examples\size_fixed.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\FixedColumns\examples\size_fluid.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\FixedColumns\examples\two_columns.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\FixedColumns\js\dataTables.fixedColumns.js" />
+    <Content Include="Admin\plugins\datatables\js\extensions\FixedColumns\js\dataTables.fixedColumns.min.js" />
+    <Content Include="Admin\plugins\datatables\js\extensions\FixedColumns\License.txt" />
+    <Content Include="Admin\plugins\datatables\js\extensions\FixedHeader\css\dataTables.fixedHeader.css" />
+    <Content Include="Admin\plugins\datatables\js\extensions\FixedHeader\css\dataTables.fixedHeader.min.css" />
+    <Content Include="Admin\plugins\datatables\js\extensions\FixedHeader\examples\header_footer.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\FixedHeader\examples\index.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\FixedHeader\examples\simple.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\FixedHeader\examples\top_left_right.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\FixedHeader\examples\two_tables.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\FixedHeader\examples\zIndexes.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\FixedHeader\js\dataTables.fixedHeader.js" />
+    <Content Include="Admin\plugins\datatables\js\extensions\FixedHeader\js\dataTables.fixedHeader.min.js" />
+    <Content Include="Admin\plugins\datatables\js\extensions\FixedHeader\Readme.txt" />
+    <Content Include="Admin\plugins\datatables\js\extensions\KeyTable\css\dataTables.keyTable.css" />
+    <Content Include="Admin\plugins\datatables\js\extensions\KeyTable\css\dataTables.keyTable.min.css" />
+    <Content Include="Admin\plugins\datatables\js\extensions\KeyTable\examples\events.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\KeyTable\examples\html.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\KeyTable\examples\index.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\KeyTable\examples\scrolling.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\KeyTable\examples\simple.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\KeyTable\js\dataTables.keyTable.js" />
+    <Content Include="Admin\plugins\datatables\js\extensions\KeyTable\js\dataTables.keyTable.min.js" />
+    <Content Include="Admin\plugins\datatables\js\extensions\KeyTable\Readme.txt" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Responsive\css\dataTables.responsive.css" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Responsive\examples\child-rows\column-control.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Responsive\examples\child-rows\custom-renderer.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Responsive\examples\child-rows\disable-child-rows.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Responsive\examples\child-rows\index.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Responsive\examples\child-rows\right-column.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Responsive\examples\child-rows\whole-row-control.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Responsive\examples\display-control\auto.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Responsive\examples\display-control\classes.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Responsive\examples\display-control\complexHeader.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Responsive\examples\display-control\fixedHeader.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Responsive\examples\display-control\index.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Responsive\examples\display-control\init-classes.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Responsive\examples\index.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Responsive\examples\initialisation\ajax.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Responsive\examples\initialisation\className.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Responsive\examples\initialisation\default.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Responsive\examples\initialisation\index.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Responsive\examples\initialisation\new.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Responsive\examples\initialisation\option.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Responsive\examples\styling\bootstrap.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Responsive\examples\styling\compact.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Responsive\examples\styling\foundation.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Responsive\examples\styling\index.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Responsive\examples\styling\scrolling.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Responsive\js\dataTables.responsive.js" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Responsive\js\dataTables.responsive.min.js" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Responsive\License.txt" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Scroller\css\dataTables.scroller.css" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Scroller\css\dataTables.scroller.min.css" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Scroller\examples\api_scrolling.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Scroller\examples\data\2500.txt" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Scroller\examples\data\ssp.php" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Scroller\examples\index.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Scroller\examples\large_js_source.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Scroller\examples\server-side_processing.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Scroller\examples\simple.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Scroller\examples\state_saving.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Scroller\images\loading-background.png" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Scroller\js\dataTables.scroller.js" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Scroller\js\dataTables.scroller.min.js" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Scroller\Readme.txt" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\css\dataTables.tableTools.css" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\css\dataTables.tableTools.min.css" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\examples\ajax.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\examples\alter_buttons.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\examples\bootstrap.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\examples\button_text.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\examples\collection.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\examples\defaults.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\examples\index.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\examples\jqueryui.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\examples\multiple_tables.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\examples\multi_instance.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\examples\new_init.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\examples\pdf_message.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\examples\plug-in.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\examples\select_column.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\examples\select_multi.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\examples\select_os.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\examples\select_single.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\examples\simple.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\examples\swf_path.html" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\images\collection.png" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\images\collection_hover.png" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\images\copy.png" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\images\copy_hover.png" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\images\csv.png" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\images\csv_hover.png" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\images\pdf.png" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\images\pdf_hover.png" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\images\print.png" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\images\print_hover.png" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\images\xls.png" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\images\xls_hover.png" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\js\dataTables.tableTools.js" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\js\dataTables.tableTools.min.js" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\swf\copy_csv_xls.swf" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\swf\copy_csv_xls_pdf.swf" />
+    <Content Include="Admin\plugins\datatables\js\jquery.dataTables.js" />
+    <Content Include="Admin\plugins\datatables\js\jquery.dataTables.min.js" />
+    <Content Include="Admin\plugins\datepicker\css\datepicker3.css" />
+    <Content Include="Admin\plugins\datepicker\js\bootstrap-datepicker.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.ar.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.az.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.bg.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.ca.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.cs.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.cy.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.da.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.de.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.el.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.es.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.et.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.fa.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.fi.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.fr.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.gl.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.he.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.hr.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.hu.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.id.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.is.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.it.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.ja.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.ka.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.kk.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.kr.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.lt.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.lv.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.mk.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.ms.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.nb.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.nl-BE.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.nl.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.no.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.pl.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.pt-BR.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.pt.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.ro.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.rs-latin.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.rs.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.ru.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.sk.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.sl.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.sq.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.sv.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.sw.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.th.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.tr.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.ua.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.vi.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.zh-CN.js" />
+    <Content Include="Admin\plugins\datepicker\js\locales\bootstrap-datepicker.zh-TW.js" />
+    <Content Include="Admin\plugins\daterangepicker\css\daterangepicker-bs3.css" />
+    <Content Include="Admin\plugins\daterangepicker\js\daterangepicker.js" />
+    <Content Include="Admin\plugins\daterangepicker\js\moment.js" />
+    <Content Include="Admin\plugins\daterangepicker\js\moment.min.js" />
+    <Content Include="Admin\plugins\fastclick\js\fastclick.js" />
+    <Content Include="Admin\plugins\fastclick\js\fastclick.min.js" />
+    <Content Include="Admin\plugins\flot\js\excanvas.js" />
+    <Content Include="Admin\plugins\flot\js\excanvas.min.js" />
+    <Content Include="Admin\plugins\flot\js\jquery.colorhelpers.js" />
+    <Content Include="Admin\plugins\flot\js\jquery.colorhelpers.min.js" />
+    <Content Include="Admin\plugins\flot\js\jquery.flot.canvas.js" />
+    <Content Include="Admin\plugins\flot\js\jquery.flot.canvas.min.js" />
+    <Content Include="Admin\plugins\flot\js\jquery.flot.categories.js" />
+    <Content Include="Admin\plugins\flot\js\jquery.flot.categories.min.js" />
+    <Content Include="Admin\plugins\flot\js\jquery.flot.crosshair.js" />
+    <Content Include="Admin\plugins\flot\js\jquery.flot.crosshair.min.js" />
+    <Content Include="Admin\plugins\flot\js\jquery.flot.errorbars.js" />
+    <Content Include="Admin\plugins\flot\js\jquery.flot.errorbars.min.js" />
+    <Content Include="Admin\plugins\flot\js\jquery.flot.fillbetween.js" />
+    <Content Include="Admin\plugins\flot\js\jquery.flot.fillbetween.min.js" />
+    <Content Include="Admin\plugins\flot\js\jquery.flot.image.js" />
+    <Content Include="Admin\plugins\flot\js\jquery.flot.image.min.js" />
+    <Content Include="Admin\plugins\flot\js\jquery.flot.js" />
+    <Content Include="Admin\plugins\flot\js\jquery.flot.min.js" />
+    <Content Include="Admin\plugins\flot\js\jquery.flot.navigate.js" />
+    <Content Include="Admin\plugins\flot\js\jquery.flot.navigate.min.js" />
+    <Content Include="Admin\plugins\flot\js\jquery.flot.pie.js" />
+    <Content Include="Admin\plugins\flot\js\jquery.flot.pie.min.js" />
+    <Content Include="Admin\plugins\flot\js\jquery.flot.resize.js" />
+    <Content Include="Admin\plugins\flot\js\jquery.flot.resize.min.js" />
+    <Content Include="Admin\plugins\flot\js\jquery.flot.selection.js" />
+    <Content Include="Admin\plugins\flot\js\jquery.flot.selection.min.js" />
+    <Content Include="Admin\plugins\flot\js\jquery.flot.stack.js" />
+    <Content Include="Admin\plugins\flot\js\jquery.flot.stack.min.js" />
+    <Content Include="Admin\plugins\flot\js\jquery.flot.symbol.js" />
+    <Content Include="Admin\plugins\flot\js\jquery.flot.symbol.min.js" />
+    <Content Include="Admin\plugins\flot\js\jquery.flot.threshold.js" />
+    <Content Include="Admin\plugins\flot\js\jquery.flot.threshold.min.js" />
+    <Content Include="Admin\plugins\flot\js\jquery.flot.time.js" />
+    <Content Include="Admin\plugins\flot\js\jquery.flot.time.min.js" />
+    <Content Include="Admin\plugins\font-awesome\css\font-awesome.css" />
+    <Content Include="Admin\plugins\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Admin\plugins\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Admin\plugins\font-awesome\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Admin\plugins\fonts\fontawesome-webfont.svg" />
+    <Content Include="Admin\plugins\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Admin\plugins\fullcalendar\css\fullcalendar.css" />
+    <Content Include="Admin\plugins\fullcalendar\css\fullcalendar.min.css" />
+    <Content Include="Admin\plugins\fullcalendar\css\print\fullcalendar.print.css" />
+    <Content Include="Admin\plugins\fullcalendar\js\fullcalendar.js" />
+    <Content Include="Admin\plugins\fullcalendar\js\fullcalendar.min.js" />
+    <Content Include="Admin\plugins\icheck\css\all.css" />
+    <Content Include="Admin\plugins\icheck\css\flat\aero%402x.png" />
+    <Content Include="Admin\plugins\icheck\css\flat\aero.css" />
+    <Content Include="Admin\plugins\icheck\css\flat\aero.png" />
+    <Content Include="Admin\plugins\icheck\css\flat\blue%402x.png" />
+    <Content Include="Admin\plugins\icheck\css\flat\blue.css" />
+    <Content Include="Admin\plugins\icheck\css\flat\blue.png" />
+    <Content Include="Admin\plugins\icheck\css\flat\flat%402x.png" />
+    <Content Include="Admin\plugins\icheck\css\flat\flat.css" />
+    <Content Include="Admin\plugins\icheck\css\flat\flat.png" />
+    <Content Include="Admin\plugins\icheck\css\flat\green%402x.png" />
+    <Content Include="Admin\plugins\icheck\css\flat\green.css" />
+    <Content Include="Admin\plugins\icheck\css\flat\green.png" />
+    <Content Include="Admin\plugins\icheck\css\flat\grey%402x.png" />
+    <Content Include="Admin\plugins\icheck\css\flat\grey.css" />
+    <Content Include="Admin\plugins\icheck\css\flat\grey.png" />
+    <Content Include="Admin\plugins\icheck\css\flat\orange%402x.png" />
+    <Content Include="Admin\plugins\icheck\css\flat\orange.css" />
+    <Content Include="Admin\plugins\icheck\css\flat\orange.png" />
+    <Content Include="Admin\plugins\icheck\css\flat\pink%402x.png" />
+    <Content Include="Admin\plugins\icheck\css\flat\pink.css" />
+    <Content Include="Admin\plugins\icheck\css\flat\pink.png" />
+    <Content Include="Admin\plugins\icheck\css\flat\purple%402x.png" />
+    <Content Include="Admin\plugins\icheck\css\flat\purple.css" />
+    <Content Include="Admin\plugins\icheck\css\flat\purple.png" />
+    <Content Include="Admin\plugins\icheck\css\flat\red%402x.png" />
+    <Content Include="Admin\plugins\icheck\css\flat\red.css" />
+    <Content Include="Admin\plugins\icheck\css\flat\red.png" />
+    <Content Include="Admin\plugins\icheck\css\flat\yellow%402x.png" />
+    <Content Include="Admin\plugins\icheck\css\flat\yellow.css" />
+    <Content Include="Admin\plugins\icheck\css\flat\yellow.png" />
+    <Content Include="Admin\plugins\icheck\css\flat\_all.css" />
+    <Content Include="Admin\plugins\icheck\css\futurico\futurico%402x.png" />
+    <Content Include="Admin\plugins\icheck\css\futurico\futurico.css" />
+    <Content Include="Admin\plugins\icheck\css\futurico\futurico.png" />
+    <Content Include="Admin\plugins\icheck\css\line\aero.css" />
+    <Content Include="Admin\plugins\icheck\css\line\blue.css" />
+    <Content Include="Admin\plugins\icheck\css\line\green.css" />
+    <Content Include="Admin\plugins\icheck\css\line\grey.css" />
+    <Content Include="Admin\plugins\icheck\css\line\line%402x.png" />
+    <Content Include="Admin\plugins\icheck\css\line\line.css" />
+    <Content Include="Admin\plugins\icheck\css\line\line.png" />
+    <Content Include="Admin\plugins\icheck\css\line\orange.css" />
+    <Content Include="Admin\plugins\icheck\css\line\pink.css" />
+    <Content Include="Admin\plugins\icheck\css\line\purple.css" />
+    <Content Include="Admin\plugins\icheck\css\line\red.css" />
+    <Content Include="Admin\plugins\icheck\css\line\yellow.css" />
+    <Content Include="Admin\plugins\icheck\css\line\_all.css" />
+    <Content Include="Admin\plugins\icheck\css\minimal\aero%402x.png" />
+    <Content Include="Admin\plugins\icheck\css\minimal\aero.css" />
+    <Content Include="Admin\plugins\icheck\css\minimal\aero.png" />
+    <Content Include="Admin\plugins\icheck\css\minimal\blue%402x.png" />
+    <Content Include="Admin\plugins\icheck\css\minimal\blue.css" />
+    <Content Include="Admin\plugins\icheck\css\minimal\blue.png" />
+    <Content Include="Admin\plugins\icheck\css\minimal\green%402x.png" />
+    <Content Include="Admin\plugins\icheck\css\minimal\green.css" />
+    <Content Include="Admin\plugins\icheck\css\minimal\green.png" />
+    <Content Include="Admin\plugins\icheck\css\minimal\grey%402x.png" />
+    <Content Include="Admin\plugins\icheck\css\minimal\grey.css" />
+    <Content Include="Admin\plugins\icheck\css\minimal\grey.png" />
+    <Content Include="Admin\plugins\icheck\css\minimal\minimal%402x.png" />
+    <Content Include="Admin\plugins\icheck\css\minimal\minimal.css" />
+    <Content Include="Admin\plugins\icheck\css\minimal\minimal.png" />
+    <Content Include="Admin\plugins\icheck\css\minimal\orange%402x.png" />
+    <Content Include="Admin\plugins\icheck\css\minimal\orange.css" />
+    <Content Include="Admin\plugins\icheck\css\minimal\orange.png" />
+    <Content Include="Admin\plugins\icheck\css\minimal\pink%402x.png" />
+    <Content Include="Admin\plugins\icheck\css\minimal\pink.css" />
+    <Content Include="Admin\plugins\icheck\css\minimal\pink.png" />
+    <Content Include="Admin\plugins\icheck\css\minimal\purple%402x.png" />
+    <Content Include="Admin\plugins\icheck\css\minimal\purple.css" />
+    <Content Include="Admin\plugins\icheck\css\minimal\purple.png" />
+    <Content Include="Admin\plugins\icheck\css\minimal\red%402x.png" />
+    <Content Include="Admin\plugins\icheck\css\minimal\red.css" />
+    <Content Include="Admin\plugins\icheck\css\minimal\red.png" />
+    <Content Include="Admin\plugins\icheck\css\minimal\yellow%402x.png" />
+    <Content Include="Admin\plugins\icheck\css\minimal\yellow.css" />
+    <Content Include="Admin\plugins\icheck\css\minimal\yellow.png" />
+    <Content Include="Admin\plugins\icheck\css\minimal\_all.css" />
+    <Content Include="Admin\plugins\icheck\css\polaris\polaris%402x.png" />
+    <Content Include="Admin\plugins\icheck\css\polaris\polaris.css" />
+    <Content Include="Admin\plugins\icheck\css\polaris\polaris.png" />
+    <Content Include="Admin\plugins\icheck\css\sqare\aero%402x.png" />
+    <Content Include="Admin\plugins\icheck\css\sqare\aero.css" />
+    <Content Include="Admin\plugins\icheck\css\sqare\aero.png" />
+    <Content Include="Admin\plugins\icheck\css\sqare\blue%402x.png" />
+    <Content Include="Admin\plugins\icheck\css\sqare\blue.css" />
+    <Content Include="Admin\plugins\icheck\css\sqare\blue.png" />
+    <Content Include="Admin\plugins\icheck\css\sqare\green%402x.png" />
+    <Content Include="Admin\plugins\icheck\css\sqare\green.css" />
+    <Content Include="Admin\plugins\icheck\css\sqare\green.png" />
+    <Content Include="Admin\plugins\icheck\css\sqare\grey%402x.png" />
+    <Content Include="Admin\plugins\icheck\css\sqare\grey.css" />
+    <Content Include="Admin\plugins\icheck\css\sqare\grey.png" />
+    <Content Include="Admin\plugins\icheck\css\sqare\orange%402x.png" />
+    <Content Include="Admin\plugins\icheck\css\sqare\orange.css" />
+    <Content Include="Admin\plugins\icheck\css\sqare\orange.png" />
+    <Content Include="Admin\plugins\icheck\css\sqare\pink%402x.png" />
+    <Content Include="Admin\plugins\icheck\css\sqare\pink.css" />
+    <Content Include="Admin\plugins\icheck\css\sqare\pink.png" />
+    <Content Include="Admin\plugins\icheck\css\sqare\purple%402x.png" />
+    <Content Include="Admin\plugins\icheck\css\sqare\purple.css" />
+    <Content Include="Admin\plugins\icheck\css\sqare\purple.png" />
+    <Content Include="Admin\plugins\icheck\css\sqare\red%402x.png" />
+    <Content Include="Admin\plugins\icheck\css\sqare\red.css" />
+    <Content Include="Admin\plugins\icheck\css\sqare\red.png" />
+    <Content Include="Admin\plugins\icheck\css\sqare\square%402x.png" />
+    <Content Include="Admin\plugins\icheck\css\sqare\square.css" />
+    <Content Include="Admin\plugins\icheck\css\sqare\square.png" />
+    <Content Include="Admin\plugins\icheck\css\sqare\yellow%402x.png" />
+    <Content Include="Admin\plugins\icheck\css\sqare\yellow.css" />
+    <Content Include="Admin\plugins\icheck\css\sqare\yellow.png" />
+    <Content Include="Admin\plugins\icheck\css\sqare\_all.css" />
+    <Content Include="Admin\plugins\icheck\js\icheck.js" />
+    <Content Include="Admin\plugins\icheck\js\icheck.min.js" />
+    <Content Include="Admin\plugins\input-mask\js\jquery.inputmask.date.extensions.js" />
+    <Content Include="Admin\plugins\input-mask\js\jquery.inputmask.extensions.js" />
+    <Content Include="Admin\plugins\input-mask\js\jquery.inputmask.js" />
+    <Content Include="Admin\plugins\input-mask\js\jquery.inputmask.numeric.extensions.js" />
+    <Content Include="Admin\plugins\input-mask\js\jquery.inputmask.phone.extensions.js" />
+    <Content Include="Admin\plugins\input-mask\js\jquery.inputmask.regex.extensions.js" />
+    <Content Include="Admin\plugins\input-mask\js\phone-codes\readme.txt" />
+    <Content Include="Admin\plugins\ionicons\css\ionicons.css" />
+    <Content Include="Admin\plugins\ionicons\css\ionicons.min.css" />
+    <Content Include="Admin\plugins\ionicons\fonts\ionicons.svg" />
+    <Content Include="Admin\plugins\ionslider\css\ion.rangeSlider.css" />
+    <Content Include="Admin\plugins\ionslider\css\ion.rangeSlider.skinFlat.css" />
+    <Content Include="Admin\plugins\ionslider\css\ion.rangeSlider.skinNice.css" />
+    <Content Include="Admin\plugins\ionslider\img\sprite-skin-flat.png" />
+    <Content Include="Admin\plugins\ionslider\img\sprite-skin-nice.png" />
+    <Content Include="Admin\plugins\ionslider\js\ion.rangeSlider.min.js" />
+    <Content Include="Admin\plugins\jquery-ui\js\jquery-ui.js" />
+    <Content Include="Admin\plugins\jquery-ui\js\jquery-ui.min.js" />
+    <None Include="Admin\plugins\jquery-validate\js\jquery.validate-vsdoc.js" />
+    <Content Include="Admin\plugins\jquery-validate\js\jquery.validate.js" />
+    <Content Include="Admin\plugins\jquery-validate\js\jquery.validate.min.js" />
+    <Content Include="Admin\plugins\jquery-validate\js\jquery.validate.unobtrusive.js" />
+    <Content Include="Admin\plugins\jquery-validate\js\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Admin\plugins\jquery\js\jQuery-2.1.4.min.js" />
+    <Content Include="Admin\plugins\jvectormap\css\jquery-jvectormap-1.2.2.css" />
+    <Content Include="Admin\plugins\jvectormap\js\jquery-jvectormap-1.2.2.min.js" />
+    <Content Include="Admin\plugins\jvectormap\js\jquery-jvectormap-usa-en.js" />
+    <Content Include="Admin\plugins\jvectormap\js\jquery-jvectormap-world-mill-en.js" />
+    <Content Include="Admin\plugins\knob\js\jquery.knob.js" />
+    <Content Include="Admin\plugins\momentjs\js\moment.min.js" />
+    <Content Include="Admin\plugins\morris\css\morris.css" />
+    <Content Include="Admin\plugins\morris\js\morris.js" />
+    <Content Include="Admin\plugins\morris\js\morris.min.js" />
+    <Content Include="Admin\plugins\pace\css\pace.css" />
+    <Content Include="Admin\plugins\pace\css\pace.min.css" />
+    <Content Include="Admin\plugins\pace\js\pace.js" />
+    <Content Include="Admin\plugins\pace\js\pace.min.js" />
+    <Content Include="Admin\plugins\raphael\js\raphael-min.js" />
+    <Content Include="Admin\plugins\select2\css\select2.css" />
+    <Content Include="Admin\plugins\select2\css\select2.min.css" />
+    <Content Include="Admin\plugins\select2\js\i18n\az.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\bg.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\ca.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\cs.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\da.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\de.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\en.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\es.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\et.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\eu.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\fa.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\fi.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\fr.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\gl.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\he.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\hi.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\hr.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\hu.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\id.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\is.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\it.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\ko.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\lt.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\lv.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\mk.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\nb.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\nl.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\pl.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\pt-BR.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\pt.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\ro.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\ru.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\sk.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\sr.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\sv.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\th.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\tr.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\uk.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\vi.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\zh-CN.js" />
+    <Content Include="Admin\plugins\select2\js\i18n\zh-TW.js" />
+    <Content Include="Admin\plugins\select2\js\select2.full.js" />
+    <Content Include="Admin\plugins\select2\js\select2.full.min.js" />
+    <Content Include="Admin\plugins\select2\js\select2.js" />
+    <Content Include="Admin\plugins\select2\js\select2.min.js" />
+    <Content Include="Admin\plugins\slimscroll\js\jquery.slimscroll.js" />
+    <Content Include="Admin\plugins\slimscroll\js\jquery.slimscroll.min.js" />
+    <Content Include="Admin\plugins\sparkline\js\jquery.sparkline.js" />
+    <Content Include="Admin\plugins\sparkline\js\jquery.sparkline.min.js" />
+    <Content Include="Admin\plugins\timepicker\css\bootstrap-timepicker.css" />
+    <Content Include="Admin\plugins\timepicker\css\bootstrap-timepicker.min.css" />
+    <Content Include="Admin\plugins\timepicker\js\bootstrap-timepicker.js" />
+    <Content Include="Admin\plugins\timepicker\js\bootstrap-timepicker.min.js" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-grid.rtl.css" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\bootstrap-utilities.css" />
+    <Content Include="Content\bootstrap-utilities.min.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.rtl.css" />
+    <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Admin\bootstrap\css\bootstrap.css.map" />
+    <Content Include="Admin\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Admin\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Admin\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Admin\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Admin\plugins\ckeditor\js\CHANGES.md" />
+    <Content Include="Admin\plugins\ckeditor\js\LICENSE.md" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\scayt\LICENSE.md" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\scayt\README.md" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\wsc\LICENSE.md" />
+    <Content Include="Admin\plugins\ckeditor\js\plugins\wsc\README.md" />
+    <Content Include="Admin\plugins\ckeditor\js\README.md" />
+    <Content Include="Admin\plugins\ckeditor\js\skins\moono\readme.md" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColReorder\Readme.md" />
+    <Content Include="Admin\plugins\datatables\js\extensions\ColVis\Readme.md" />
+    <Content Include="Admin\plugins\datatables\js\extensions\FixedColumns\Readme.md" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Responsive\css\dataTables.responsive.scss" />
+    <Content Include="Admin\plugins\datatables\js\extensions\Responsive\Readme.md" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\images\psd\collection.psd" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\images\psd\copy document.psd" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\images\psd\file_types.psd" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\images\psd\printer.psd" />
+    <Content Include="Admin\plugins\datatables\js\extensions\TableTools\Readme.md" />
+    <Content Include="Admin\plugins\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Admin\plugins\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Admin\plugins\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Admin\plugins\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Admin\plugins\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Admin\plugins\font-awesome\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Admin\plugins\font-awesome\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Admin\plugins\font-awesome\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Admin\plugins\font-awesome\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Admin\plugins\fonts\fontawesome-webfont.eot" />
+    <Content Include="Admin\plugins\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Admin\plugins\fonts\fontawesome-webfont.woff" />
+    <Content Include="Admin\plugins\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Admin\plugins\fonts\FontAwesome.otf" />
+    <Content Include="Admin\plugins\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Admin\plugins\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Admin\plugins\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Admin\plugins\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Admin\plugins\fonts\ionicons.woff" />
+    <Content Include="Admin\plugins\input-mask\js\phone-codes\phone-be.json" />
+    <Content Include="Admin\plugins\input-mask\js\phone-codes\phone-codes.json" />
+    <Content Include="Admin\plugins\ionicons\fonts\ionicons.eot" />
+    <Content Include="Admin\plugins\ionicons\fonts\ionicons.ttf" />
+    <Content Include="Admin\plugins\ionicons\fonts\ionicons.woff" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.esm.js" />
+    <Content Include="Scripts\bootstrap.esm.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Scripts\jquery-3.5.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.5.1.js" />
+    <Content Include="Scripts\jquery-3.5.1.min.js" />
+    <Content Include="Scripts\jquery-3.5.1.slim.js" />
+    <Content Include="Scripts\jquery-3.5.1.slim.min.js" />
+    <Content Include="Scripts\jquery-3.5.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.5.1.min.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Login\NotConnected.cshtml" />
+    <Content Include="Views\Login\IsConnected.cshtml" />
+    <Content Include="Views\Login\ForgotPassword.cshtml" />
+    <Content Include="Views\Login\ResetPassword.cshtml" />
+    <Content Include="Views\Login\UpdatePassword.cshtml" />
+    <Content Include="Views\Home\Ajouter.cshtml" />
+    <Content Include="Views\Home\Ajouter1.cshtml" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.esm.min.js.map" />
+    <Content Include="Scripts\bootstrap.esm.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Views\Home\AfficheContact.cshtml" />
+    <Content Include="Views\Home\AfficheContact1.cshtml" />
+    <Content Include="Views\Home\DeleteContact.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.3\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
+    <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.3\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap.rtl.min.css.map" />
+    <Content Include="Content\bootstrap.rtl.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>56176</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44345/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.DiaSymReader.Native.1.7.0\build\Microsoft.DiaSymReader.Native.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.DiaSymReader.Native.1.7.0\build\Microsoft.DiaSymReader.Native.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.3\build\Microsoft.CodeAnalysis.Analyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.3\build\Microsoft.CodeAnalysis.Analyzers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.3\build\Microsoft.CodeAnalysis.Analyzers.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.3\build\Microsoft.CodeAnalysis.Analyzers.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.1\build\Microsoft.Extensions.Logging.Abstractions.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.1\build\Microsoft.Extensions.Logging.Abstractions.targets'))" />
+    <Error Condition="!Exists('..\packages\System.Text.Json.6.0.2\build\System.Text.Json.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Text.Json.6.0.2\build\System.Text.Json.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.AspNetCore.Mvc.Razor.ViewCompilation.2.2.0\build\netstandard2.0\Microsoft.AspNetCore.Mvc.Razor.ViewCompilation.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.AspNetCore.Mvc.Razor.ViewCompilation.2.2.0\build\netstandard2.0\Microsoft.AspNetCore.Mvc.Razor.ViewCompilation.targets'))" />
+  </Target>
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
+  <Import Project="..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.3\build\Microsoft.CodeAnalysis.Analyzers.targets" Condition="Exists('..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.3\build\Microsoft.CodeAnalysis.Analyzers.targets')" />
+  <Import Project="..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.1\build\Microsoft.Extensions.Logging.Abstractions.targets" Condition="Exists('..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.1\build\Microsoft.Extensions.Logging.Abstractions.targets')" />
+  <Import Project="..\packages\System.Text.Json.6.0.2\build\System.Text.Json.targets" Condition="Exists('..\packages\System.Text.Json.6.0.2\build\System.Text.Json.targets')" />
+  <Import Project="..\packages\Microsoft.AspNetCore.Mvc.Razor.ViewCompilation.2.2.0\build\netstandard2.0\Microsoft.AspNetCore.Mvc.Razor.ViewCompilation.targets" Condition="Exists('..\packages\Microsoft.AspNetCore.Mvc.Razor.ViewCompilation.2.2.0\build\netstandard2.0\Microsoft.AspNetCore.Mvc.Razor.ViewCompilation.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

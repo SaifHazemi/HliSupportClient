@@ -1,0 +1,262 @@
+﻿@model IEnumerable<HliSupportClient.Models.Incident>
+
+@{ Layout = null; }
+@section Menu {
+    @Scripts.Render("~/Scripts/Tables/Data/menu")
+}
+
+@Styles.Render("~/AdminLTE/plugins/datatables/css")
+@Styles.Render("~/AdminLTE/plugins/font-awesome/css")
+@Styles.Render("~/AdminLTE/plugins/ionicons/css")
+@Styles.Render("~/AdminLTE/bootstrap/css")
+@Styles.Render("~/AdminLTE/dist/css")
+@Styles.Render("~/AdminLTE/dist/css/skins")
+@Scripts.Render("~/AdminLTE/plugins/jquery/js")
+
+@Scripts.Render("~/AdminLTE/bootstrap/js")
+@Scripts.Render("~/AdminLTE/plugins/slimscroll/js")
+@Scripts.Render("~/AdminLTE/plugins/fastclick/js")
+@Scripts.Render("~/Scripts/Shared/_Layout")
+@Scripts.Render("~/AdminLTE/dist/js")
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>HLI</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="box box-default" style="padding:10px">
+        <div class="box-header with-border">
+            <h3 class="box-title">Recherche avancée</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Date début</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Creé par</label>
+                        <select class="form-control select2" style="width: 100%;">
+                            <option selected="selected">Creé par</option>
+                            <option>HLI</option>
+                            <option>California</option>
+                            <option>Delaware</option>
+                            <option>Tennessee</option>
+                            <option>Texas</option>
+                            <option>Washington</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Date fin</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Réouverte</label>
+                        <select class="form-control select2" style="width: 100%;">
+                            <option selected="selected">Oui</option>
+                            <option>Non</option>
+
+
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Client</label>
+                        <input type="text" value="" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Reporté</label>
+                        <select class="form-control select2" style="width: 100%;">
+
+                            <option selected="selected">Oui</option>
+                            <option>Non</option>
+
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Raison de statut</label>
+                        <select class="form-control select2" style="width: 100%;">
+                            <option selected="selected">Alabama</option>
+                            <option>Alaska</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Type</label>
+                        <select class="form-control select2" style="width: 100%;">
+                            <option selected="selected">Alabaama</option>
+                            <option>Alaska</option>
+                            <option>California</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Projets</label>
+                        <select class="form-control select2" style="width: 100%;">
+                            <option selected="selected">Alabama</option>
+                            <option>Alaska</option>
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Priorités</label>
+                        <select class="form-control select2" style="width: 100%;">
+                            <option selected="selected">Alabama</option>
+                            <option>Alaska</option>
+
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Statuts</label>
+                        <select class="form-control select2" style="width: 100%;">
+                            <option selected="selected">Alabama</option>
+                            <option>Alaska</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Concerne</label>
+                        <select class="form-control select2" style="width: 100%;">
+                            <option selected="selected">CRM</option>
+                            <option>Autres</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="" style=" float:right ; padding-right:100px">
+
+
+                    <button type="button" class="btn btn-block btn-danger btn-flat" style=" width:100px ; float:right">Annuler</button>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row" style="padding:10px">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <div>
+                        <div>
+                            <button type="button" class="btn btn-block btn-info btn-flat" style="width: 150px; float: left; padding-left: 10px ">Ajoute Demande</button>
+                        </div>
+                        <div style="padding-right: 100px; margin-left: 200px;">
+                            <button type="button" class="btn btn-block btn-warning btn-flat" style="width: 150px; float: left;">Exporter</button>
+                        </div>
+                        <div style="padding-right:100px">
+                            <button type="button" class="btn btn-block btn-danger btn-flat" style="width: 100px; float: right ">Annuler</button>
+                        </div>
+                        <div class="form-group" style="margin-left: 500px;">
+                            <select class="form-control " style="width: 200px;">
+                                <option selected="selected">10</option>
+                                <option>Autres</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-body">
+
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ticketnumber)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.title)
+                                </th>
+
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ContactName)
+                                </th>
+
+                                <th>
+                                    @Html.DisplayNameFor(model => model.AccountName)
+                                </th>
+
+                                <th>
+                                    @Html.DisplayNameFor(model => model.createdon)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.prioritycode)
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ticketnumber)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.title)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ContactName)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.AccountName)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.createdon)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.prioritycode)
+                                </td>
+
+                            </tr>
+}
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+@section Scripts {
+    @Scripts.Render("~/AdminLTE/plugins/datatables/js")
+    @Scripts.Render("~/Scripts/Tables/Data")
+}
+

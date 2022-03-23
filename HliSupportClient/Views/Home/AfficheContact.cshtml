@@ -1,0 +1,127 @@
+﻿@model List<HliSupportClient.Models.Contact>
+
+@{ Layout = null; }
+@section Menu {
+    @Scripts.Render("~/Scripts/Tables/Data/menu")
+}
+
+@Styles.Render("~/AdminLTE/plugins/datatables/css")
+@Styles.Render("~/AdminLTE/plugins/font-awesome/css")
+@Styles.Render("~/AdminLTE/plugins/ionicons/css")
+@Styles.Render("~/AdminLTE/bootstrap/css")
+@Styles.Render("~/AdminLTE/dist/css")
+@Styles.Render("~/AdminLTE/dist/css/skins")
+@Scripts.Render("~/AdminLTE/plugins/jquery/js")
+
+@Scripts.Render("~/AdminLTE/bootstrap/js")
+@Scripts.Render("~/AdminLTE/plugins/slimscroll/js")
+@Scripts.Render("~/AdminLTE/plugins/fastclick/js")
+@Scripts.Render("~/Scripts/Shared/_Layout")
+@Scripts.Render("~/AdminLTE/dist/js")
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="~/Admin/Image/cropped-favicon.png">
+    <title>HLI</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini" style="background-color:whitesmoke ; width:1300px;padding:20px">
+    <div class="box box-solid" style="padding:20px">
+        <div class="box-header with-border">
+            <h3 class="box-title">Créer Contact</h3>
+        </div>
+        @using (Html.BeginForm("AfficheContact", "Home", FormMethod.Get))
+        {
+            <div class="box-body" style="margin-top:20px">
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label>Creé par</label>
+                            <select class="form-control select2" name="select" style="width: 100%;">
+                                <option value="tout" selected>Sélectionner tout</option>
+                                @foreach (var item in ViewBag.comptes)
+                                {
+                                    <option value=@item.accountid> @item.name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>.
+                </div>
+
+
+
+
+
+
+                <div class="" style=" float:right ; padding-right:30px">
+
+
+                    <button type="submit" class="btn btn-block btn-outline-primary btn-flat" style=" width:100px ; float:right">Ajouter</button>
+
+                </div>
+
+            </div>
+        }
+    </div>
+
+    <div class="box-body">
+       
+            <table id="example1" class="table table-bordered table-striped">
+                <thead>
+
+                    <tr>
+                        <th>
+                            Nom Complet
+                        </th>
+
+                        <th>
+                            Email
+                        </th>
+
+                        <th>
+                            Num de Telephone
+                        </th>
+
+                    </tr>
+
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.fullname)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.emailaddress1)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.telephone1)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Delete","About", new { id = item.contactId })
+                        </td>
+
+                    </tr>
+                    }
+                </tbody>
+
+            </table>
+           
+        </div>
+
+</body>
+
+</html>
+
+@section Scripts {
+    @Scripts.Render("~/AdminLTE/plugins/datatables/js")
+    @Scripts.Render("~/Scripts/Tables/Data")
+}

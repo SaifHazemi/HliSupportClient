@@ -1,0 +1,211 @@
+﻿@model HliSupportClient.Models.Contact
+
+
+@{ ViewBag.Title = "Charts";
+    ViewBag.SubTitle = "Inline";
+
+
+
+    //if (Session["id"] == null)
+    //{
+    //    Response.Redirect("~/Home/Login");
+    //};
+
+}
+
+@Styles.Render("~/AdminLTE/plugins/font-awesome/css")
+@Styles.Render("~/AdminLTE/plugins/ionicons/css")
+@Styles.Render("~/AdminLTE/bootstrap/css")
+@Styles.Render("~/AdminLTE/dist/css")
+@Styles.Render("~/AdminLTE/dist/css/skins")
+
+@section Menu {
+    @Scripts.Render("~/Scripts/Charts/Inline/menu")
+    @Scripts.Render("~/Scripts/Charts/ChartsJs/menu")
+    @Scripts.Render("~/Scripts/Charts/Morris/menu")
+}
+<body>
+    <div class="box box-default">
+        <div class="box-header with-border">
+            <h3 class="box-title">@Html.DisplayNameFor(model => Model.emailaddress1)</h3>
+
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Client</label>
+                        <input class="form-control" type="text" value="Client" />
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        <label>Projet</label>
+                        <select class="form-control select2" style="width: 100%;">
+                            <option selected="selected">Alabama</option>
+                            <option>Alaska</option>
+                            <option disabled="disabled">California (disabled)</option>
+                            <option>Delaware</option>
+                            <option>Tennessee</option>
+                            <option>Texas</option>
+                            <option>Washington</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Enquete de satisfaction clients</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+
+                    </div>
+                </div>
+                <div class="box-body chart-responsive">
+                    <div class="chart" id="revenue-chart" style="height: 300px;"></div>
+                </div>
+            </div>
+            <div class="box box-danger">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Demandes par contact</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+
+                    </div>
+                </div>
+                <div class="box-body chart-responsive">
+                    <div class="chart" id="sales-chart" style="height: 300px; position: relative;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Evolution de nombre de demandes</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+
+                    </div>
+                </div>
+                <div class="box-body chart-responsive">
+                    <div class="chart" id="line-chart" style="height: 300px;"></div>
+                </div>
+            </div>
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Demandes par type de raisons de statut</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+
+                    </div>
+                </div>
+                <div class="box-body chart-responsive">
+                    <div class="chart" id="bar-chart" style="height: 300px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box">
+        <div class="box-header">
+            <h3 class="box-title">Raisons de statut des demandes</h3>
+        </div>
+        <div class="box-body no-padding">
+            <table class="table table-striped">
+
+                <tr>
+                    <td>1.</td>
+                    <td>Cloturée  </td>
+                    <td>
+                        <div class="progress progress-xs">
+                            <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                        </div>
+                    </td>
+                    <td><span class="badge bg-red">55%</span></td>
+                </tr>
+                <tr>
+                    <td>2.</td>
+                    <td>Annulée</td>
+                    <td>
+                        <div class="progress progress-xs">
+                            <div class="progress-bar progress-bar-yellow" style="width: 70%"></div>
+                        </div>
+                    </td>
+                    <td><span class="badge bg-yellow">70%</span></td>
+                </tr>
+                <tr>
+                    <td>3.</td>
+                    <td>En cours</td>
+                    <td>
+                        <div class="progress progress-xs progress-striped active">
+                            <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
+                        </div>
+                    </td>
+                    <td><span class="badge bg-light-blue">30%</span></td>
+                </tr>
+                <tr>
+                    <td>4.</td>
+                    <td>Résolue</td>
+                    <td>
+                        <div class="progress progress-xs progress-striped active">
+                            <div class="progress-bar progress-bar-success" style="width: 20%"></div>
+                        </div>
+                    </td>
+                    <td><span class="badge bg-green">20%</span></td>
+                </tr>
+                <tr>
+                    <td>4.</td>
+                    <td>Initiale</td>
+                    <td>
+                        <div class="progress progress-xs progress-striped active">
+                            <div class="progress-bar progress-bar-success" style="width: 90%"></div>
+                        </div>
+                    </td>
+                    <td><span class="badge bg-black">90%</span></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="control-sidebar-bg"></div>
+    @Scripts.Render("~/AdminLTE/plugins/jquery/js")
+
+    @Scripts.Render("~/AdminLTE/bootstrap/js")
+    @Scripts.Render("~/AdminLTE/plugins/slimscroll/js")
+    @Scripts.Render("~/AdminLTE/plugins/fastclick/js")
+    @Scripts.Render("~/Scripts/Shared/_Layout")
+    @Scripts.Render("~/AdminLTE/dist/js")
+
+
+</body>
+
+
+
+
+
+
+@section Scripts {
+
+    @Scripts.Render("~/AdminLTE/plugins/raphael/js")
+    @Scripts.Render("~/AdminLTE/plugins/morris/js")
+    @Scripts.Render("~/Scripts/Charts/Morris")
+}
+
+
